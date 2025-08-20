@@ -165,7 +165,7 @@ print(df.head())
 
 ## 🛡️ Requirements
 
-- Python 3.8+
+- Python 3.13+
 - Valid Apistemic Markets API key
 - Dependencies managed with `uv`
 
