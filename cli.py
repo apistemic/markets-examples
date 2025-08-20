@@ -1,16 +1,14 @@
 import io
 import json
 import logging
-import typer
-from typing import Optional, Union
 from enum import Enum
+from typing import Optional
+
 import pandas as pd
+import typer
+
 from apistemic.markets.api import create_markets_api_from_environment
-from apistemic.markets.models import (
-    CompetitorItem,
-    CompetitorsResponse,
-    LookalikesResponse,
-)
+from apistemic.markets.models import CompetitorItem
 
 app = typer.Typer()
 
@@ -54,7 +52,7 @@ def fetch(
 def _fetch_items(
     slug: str,
     endpoint: str,
-) -> Union[CompetitorsResponse, LookalikesResponse]:
+) -> list[CompetitorItem]:
     """Fetch data from the API and apply limit if specified."""
     api = create_markets_api_from_environment()
 
@@ -86,8 +84,9 @@ def _display_items(items: list[CompetitorItem], format: OutputFormat):
     elif format == OutputFormat.table:
         typer.echo(df)
     else:
+        formats = ", ".join(OutputFormat.__members__.keys())
         raise ValueError(
-            f"Unsupported format: {format}. Supported formats are: {', '.join(OutputFormat.__members__.keys())}"
+            f"Unsupported format: {format}. Supported formats are: {formats}"
         )
 
 

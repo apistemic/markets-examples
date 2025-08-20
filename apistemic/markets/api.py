@@ -1,14 +1,13 @@
-from abc import ABC
 import logging
 import os
+from abc import ABC
 from urllib.parse import urljoin
+
 import httpx
 
-from apistemic.markets.models import (
-    CompetitorItem,
-    CompetitorsResponse,
-    LookalikesResponse,
-)
+from apistemic.markets.models import CompetitorItem
+from apistemic.markets.models import CompetitorsResponse
+from apistemic.markets.models import LookalikesResponse
 
 LOGGER = logging.getLogger(__name__)
 
@@ -82,8 +81,9 @@ class RegularApiBackend(ApiBackend):
         return resp
 
 
-def create_markets_api_from_environment():
+def create_markets_api_from_environment() -> MarketsApi:
     """Creates a MarketsAPI depending on the found environment variables"""
+    backend: ApiBackend
     if os.environ.get("RAPIDAPI_API_KEY"):
         LOGGER.info("using RapidAPI backend")
         backend = RapidApiBackend(os.environ["RAPIDAPI_API_KEY"])

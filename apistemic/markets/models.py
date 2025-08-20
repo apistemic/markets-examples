@@ -1,7 +1,8 @@
-from typing import List, Optional
+from typing import List
+from typing import Optional
 
-from pydantic import BaseModel
 import pandas as pd
+from pydantic import BaseModel
 
 
 class Organization(BaseModel):

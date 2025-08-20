@@ -6,7 +6,7 @@
 
 > **Powerful CLI tools and examples for the Apistemic Markets API** 📊
 
-Effortlessly discover competitors and lookalike companies with this feature-rich command-line interface. 
+Effortlessly discover competitors and lookalike companies with this feature-rich command-line interface.
 Export data in multiple formats and integrate seamlessly into your business intelligence workflows.
 
 ## ✨ Features
@@ -78,7 +78,7 @@ uv run python cli.py fetch competitors linkedin:startupradar --format csv
 ```bash
 uv run python cli.py --help
 # Usage: cli.py [OPTIONS] COMMAND [ARGS]...
-# 
+#
 # ╭─ Options ────────────────────────────────────────────────────────────────────╮
 # │ --install-completion          Install completion for the current shell.      │
 # │ --show-completion             Show completion for the current shell, to copy │

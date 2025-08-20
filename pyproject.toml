@@ -21,3 +21,4 @@ select = [
 
 [tool.ruff.lint.isort]
 known-first-party = ["apistemic"]
+force-single-line = true
