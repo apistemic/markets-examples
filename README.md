@@ -21,9 +21,6 @@ Export data in multiple formats and integrate seamlessly into your business inte
 ## 🚀 Quick Start
 
 ```bash
-# Install dependencies
-uv sync
-
 # Discover competitors
 uv run python cli.py fetch competitors linkedin:startupradar
 
@@ -41,17 +38,64 @@ uv run python cli.py fetch competitors linkedin:uber-com --format parquet > uber
 ```bash
 # Get help, works for all commands
 uv run python cli.py --help
+# Usage: cli.py [OPTIONS] COMMAND [ARGS]...
+# 
+# ╭─ Options ────────────────────────────────────────────────────────────────────╮
+# │ --install-completion          Install completion for the current shell.      │
+# │ --show-completion             Show completion for the current shell, to copy │
+# │                               it or customize the installation.              │
+# │ --help                        Show this message and exit.                    │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
+# ╭─ Commands ───────────────────────────────────────────────────────────────────╮
+# │ leadgen                                                                      │
+# │ fetch     Fetch competitors or lookalikes for a given company.               │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
+
 uv run python cli.py fetch --help
-...
+# Usage: cli.py fetch [OPTIONS] ENDPOINT:{competitors|lookalikes} SLUG
+#
+# Fetch competitors or lookalikes for a given company.
+#
+# ╭─ Arguments ──────────────────────────────────────────────────────────────────╮
+# │ *    endpoint      Type of data to fetch [required]                         │
+# │ *    slug          LinkedIn slug (e.g., 'linkedin:startupradar') [required] │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
+# ╭─ Options ────────────────────────────────────────────────────────────────────╮
+# │ --limit         INTEGER                   Limit number of results            │
+# │ --format        [table|json|csv|parquet]  Output format [default: table]     │
+# │ --help                                    Show this message and exit.        │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
 
 # Get competitors in human-readable table format (default)
-python cli.py fetch competitors linkedin:company-slug
+uv run python cli.py fetch competitors linkedin:startupradar --limit 3
+#         score  organization.id organization.name  ...
+# 0    1.000000           721826  startupradar.co  ...
+# 1    0.568760           539540         Seedtable  ...
+# 2    0.550740           833275            Signal  ...
 
 # Get lookalikes as JSON
-python cli.py fetch lookalikes linkedin:company-slug --format json
+uv run python cli.py fetch lookalikes linkedin:crunchbase --limit 2 --format json
+# [
+#   {
+#     "organization": {
+#       "id": 177620,
+#       "name": "Crunchbase",
+#       "description": "Crunchbase is a predictive solution...",
+#       "website_url": "https://www.crunchbase.com/",
+#       "linkedin_url": "https://linkedin.com/company/crunchbase",
+#       "employee_count": 262,
+#       "founded_year": 2007
+#     },
+#     "score": 1.0
+#   },
+#   ...
+# ]
 
-# Get competitors as parquet
-python cli.py fetch competitors linkedin:company-slug --format csv
+# Get competitors as CSV
+uv run python cli.py fetch competitors linkedin:startupradar --limit 2 --format csv
+# score,organization.id,organization.name,organization.description,organization.website_url,organization.linkedin_url,organization.employee_count,organization.founded_year
+# 1.0,721826,startupradar.co,"Discover new startups earlier with our API...",https://startupradar.co,https://linkedin.com/company/startupradar,1,
+# 0.568760,539540,Seedtable,"Your go-to source for in-depth insights...",https://seedtable.com,https://linkedin.com/company/seedtable,0,2018.0
 ```
 
 ### Export Formats
@@ -94,11 +138,11 @@ python cli.py fetch competitors linkedin:company-slug --format csv
 ### Market Research Workflow
 ```bash
 # Export competitor data for analysis
-python cli.py fetch competitors linkedin:your-company --format csv > competitors.csv
+uv run python cli.py fetch competitors linkedin:your-company --format csv > competitors.csv
 
 # Get lookalikes in multiple formats
-python cli.py fetch lookalikes linkedin:your-company --format json > lookalikes.json
-python cli.py fetch lookalikes linkedin:your-company --format parquet > lookalikes.parquet
+uv run python cli.py fetch lookalikes linkedin:your-company --format json > lookalikes.json
+uv run python cli.py fetch lookalikes linkedin:your-company --format parquet > lookalikes.parquet
 ```
 
 ### Integration with Data Science Tools
