@@ -100,10 +100,11 @@ uv run python cli.py fetch --help
 #
 # ╭─ Arguments ──────────────────────────────────────────────────────────────────╮
 # │ *    endpoint      Type of data to fetch [required]                          │
-# │ *    slug          LinkedIn slug (e.g., 'linkedin:startupradar') [required]  │
+# │ *    slug          Company identifier, can be company ID, Linkedin slug or   │
+# │                    domain name. For example, to get Uber both                │
+# │                    `linkedin:uber-com` and `domain:uber.com` work [required] │
 # ╰──────────────────────────────────────────────────────────────────────────────╯
 # ╭─ Options ────────────────────────────────────────────────────────────────────╮
-# │ --limit         INTEGER                   Limit number of results            │
 # │ --format        [table|json|csv|parquet]  Output format [default: table]     │
 # │ --help                                    Show this message and exit.        │
 # ╰──────────────────────────────────────────────────────────────────────────────╯
@@ -151,11 +152,11 @@ uv run python cli.py fetch --help
 ### Market Research Workflow
 ```bash
 # Export competitor data for analysis
-uv run python cli.py fetch competitors linkedin:your-company --format csv > competitors.csv
+uv run python cli.py fetch competitors linkedin:uber-com --format csv > competitors.csv
 
-# Get lookalikes in multiple formats
-uv run python cli.py fetch lookalikes linkedin:your-company --format json > lookalikes.json
-uv run python cli.py fetch lookalikes linkedin:your-company --format parquet > lookalikes.parquet
+# Get lookalikes in multiple formats (once via domain and once via linkedin slug)
+uv run python cli.py fetch lookalikes domain:uber.com --format json > lookalikes.json
+uv run python cli.py fetch lookalikes linkedin:uber-com --format parquet > lookalikes.parquet
 ```
 
 ### Integration with Data Science Tools

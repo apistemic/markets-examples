@@ -2,7 +2,6 @@ import io
 import json
 import logging
 from enum import Enum
-from typing import Optional
 
 import pandas as pd
 import typer
@@ -34,9 +33,13 @@ def leadgen():
 def fetch(
     endpoint: Endpoint = typer.Argument(..., help="Type of data to fetch"),
     slug: str = typer.Argument(
-        ..., help="LinkedIn slug (e.g., 'linkedin:startupradar')"
+        ...,
+        help=(
+            "company identifier, can be company ID, Linkedin slug or domain name."
+            " For example, to get Uber"
+            " both `linkedin:uber-com` and `domain:uber.com` work"
+        ),
     ),
-    limit: Optional[int] = typer.Option(None, help="Limit number of results"),
     format: OutputFormat = typer.Option(OutputFormat.table, help="Output format"),
 ):
     """
