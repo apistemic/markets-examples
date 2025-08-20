@@ -37,16 +37,17 @@ uv run python cli.py fetch competitors linkedin:uber-com --format parquet > uber
 
 **Get competitors in human-readable table format (default):**
 ```bash
-uv run python cli.py fetch competitors linkedin:startupradar --limit 3
+uv run python cli.py fetch competitors linkedin:startupradar
 #         score  organization.id organization.name  ...
 # 0    1.000000           721826  startupradar.co  ...
 # 1    0.568760           539540         Seedtable  ...
 # 2    0.550740           833275            Signal  ...
+# ...
 ```
 
 **Get lookalikes as structured JSON:**
 ```bash
-uv run python cli.py fetch lookalikes linkedin:crunchbase --limit 2 --format json
+uv run python cli.py fetch lookalikes linkedin:crunchbase --format json
 # [
 #   {
 #     "organization": {
@@ -60,16 +61,17 @@ uv run python cli.py fetch lookalikes linkedin:crunchbase --limit 2 --format jso
 #     },
 #     "score": 1.0
 #   },
-#   ...
+#   //...
 # ]
 ```
 
 **Get competitors as CSV for spreadsheet analysis:**
 ```bash
-uv run python cli.py fetch competitors linkedin:startupradar --limit 2 --format csv
+uv run python cli.py fetch competitors linkedin:startupradar --format csv
 # score,organization.id,organization.name,organization.description,organization.website_url,organization.linkedin_url,organization.employee_count,organization.founded_year
 # 1.0,721826,startupradar.co,"Discover new startups earlier with our API...",https://startupradar.co,https://linkedin.com/company/startupradar,1,
 # 0.568760,539540,Seedtable,"Your go-to source for in-depth insights...",https://seedtable.com,https://linkedin.com/company/seedtable,0,2018.0
+# ...
 ```
 
 **Get help for any command:**
@@ -97,8 +99,8 @@ uv run python cli.py fetch --help
 # Fetch competitors or lookalikes for a given company.
 #
 # ╭─ Arguments ──────────────────────────────────────────────────────────────────╮
-# │ *    endpoint      Type of data to fetch [required]                         │
-# │ *    slug          LinkedIn slug (e.g., 'linkedin:startupradar') [required] │
+# │ *    endpoint      Type of data to fetch [required]                          │
+# │ *    slug          LinkedIn slug (e.g., 'linkedin:startupradar') [required]  │
 # ╰──────────────────────────────────────────────────────────────────────────────╯
 # ╭─ Options ────────────────────────────────────────────────────────────────────╮
 # │ --limit         INTEGER                   Limit number of results            │
@@ -131,8 +133,10 @@ uv run python cli.py fetch --help
 
 3. **Configure API credentials**
    There's a free tier to play around with the API.
+   If you don't set up anything, you'll use it automatically.
    [Sign up](https://rapidapi.com/apistemic-com-apistemic-com-default/api/market-intelligence-competitors-lookalikes-and-more)
    to get an API key.
+   With an API key, there's two options:
    ```bash
    # add API key to your env
    export RAPIDAPI_API_KEY="your-rapidapi-api-key"
