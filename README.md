@@ -35,45 +35,17 @@ uv run python cli.py fetch competitors linkedin:uber-com --format parquet > uber
 
 ### Basic Commands
 
+**Get competitors in human-readable table format (default):**
 ```bash
-# Get help, works for all commands
-uv run python cli.py --help
-# Usage: cli.py [OPTIONS] COMMAND [ARGS]...
-# 
-# ╭─ Options ────────────────────────────────────────────────────────────────────╮
-# │ --install-completion          Install completion for the current shell.      │
-# │ --show-completion             Show completion for the current shell, to copy │
-# │                               it or customize the installation.              │
-# │ --help                        Show this message and exit.                    │
-# ╰──────────────────────────────────────────────────────────────────────────────╯
-# ╭─ Commands ───────────────────────────────────────────────────────────────────╮
-# │ leadgen                                                                      │
-# │ fetch     Fetch competitors or lookalikes for a given company.               │
-# ╰──────────────────────────────────────────────────────────────────────────────╯
-
-uv run python cli.py fetch --help
-# Usage: cli.py fetch [OPTIONS] ENDPOINT:{competitors|lookalikes} SLUG
-#
-# Fetch competitors or lookalikes for a given company.
-#
-# ╭─ Arguments ──────────────────────────────────────────────────────────────────╮
-# │ *    endpoint      Type of data to fetch [required]                         │
-# │ *    slug          LinkedIn slug (e.g., 'linkedin:startupradar') [required] │
-# ╰──────────────────────────────────────────────────────────────────────────────╯
-# ╭─ Options ────────────────────────────────────────────────────────────────────╮
-# │ --limit         INTEGER                   Limit number of results            │
-# │ --format        [table|json|csv|parquet]  Output format [default: table]     │
-# │ --help                                    Show this message and exit.        │
-# ╰──────────────────────────────────────────────────────────────────────────────╯
-
-# Get competitors in human-readable table format (default)
 uv run python cli.py fetch competitors linkedin:startupradar --limit 3
 #         score  organization.id organization.name  ...
 # 0    1.000000           721826  startupradar.co  ...
 # 1    0.568760           539540         Seedtable  ...
 # 2    0.550740           833275            Signal  ...
+```
 
-# Get lookalikes as JSON
+**Get lookalikes as structured JSON:**
+```bash
 uv run python cli.py fetch lookalikes linkedin:crunchbase --limit 2 --format json
 # [
 #   {
@@ -90,12 +62,49 @@ uv run python cli.py fetch lookalikes linkedin:crunchbase --limit 2 --format jso
 #   },
 #   ...
 # ]
+```
 
-# Get competitors as CSV
+**Get competitors as CSV for spreadsheet analysis:**
+```bash
 uv run python cli.py fetch competitors linkedin:startupradar --limit 2 --format csv
 # score,organization.id,organization.name,organization.description,organization.website_url,organization.linkedin_url,organization.employee_count,organization.founded_year
 # 1.0,721826,startupradar.co,"Discover new startups earlier with our API...",https://startupradar.co,https://linkedin.com/company/startupradar,1,
 # 0.568760,539540,Seedtable,"Your go-to source for in-depth insights...",https://seedtable.com,https://linkedin.com/company/seedtable,0,2018.0
+```
+
+**Get help for any command:**
+```bash
+uv run python cli.py --help
+# Usage: cli.py [OPTIONS] COMMAND [ARGS]...
+# 
+# ╭─ Options ────────────────────────────────────────────────────────────────────╮
+# │ --install-completion          Install completion for the current shell.      │
+# │ --show-completion             Show completion for the current shell, to copy │
+# │                               it or customize the installation.              │
+# │ --help                        Show this message and exit.                    │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
+# ╭─ Commands ───────────────────────────────────────────────────────────────────╮
+# │ leadgen                                                                      │
+# │ fetch     Fetch competitors or lookalikes for a given company.               │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
+```
+
+**Get detailed help for the fetch command:**
+```bash
+uv run python cli.py fetch --help
+# Usage: cli.py fetch [OPTIONS] ENDPOINT:{competitors|lookalikes} SLUG
+#
+# Fetch competitors or lookalikes for a given company.
+#
+# ╭─ Arguments ──────────────────────────────────────────────────────────────────╮
+# │ *    endpoint      Type of data to fetch [required]                         │
+# │ *    slug          LinkedIn slug (e.g., 'linkedin:startupradar') [required] │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
+# ╭─ Options ────────────────────────────────────────────────────────────────────╮
+# │ --limit         INTEGER                   Limit number of results            │
+# │ --format        [table|json|csv|parquet]  Output format [default: table]     │
+# │ --help                                    Show this message and exit.        │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
 ```
 
 ### Export Formats
