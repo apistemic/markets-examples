@@ -78,6 +78,16 @@ def _display_items(items: list[CompetitorItem], format: OutputFormat):
     items_data = [item.model_dump() for item in items]
     df = pd.json_normalize(items_data)
 
+    # Convert nullable int columns to Int64 dtype
+    int_columns = [
+        "organization.id",
+        "organization.employee_count",
+        "organization.founded_year",
+    ]
+    for col in int_columns:
+        if col in df.columns:
+            df[col] = df[col].astype("Int64")
+
     if format == OutputFormat.csv:
         typer.echo(df.to_csv(index=False))
     elif format == OutputFormat.parquet:
@@ -85,7 +95,14 @@ def _display_items(items: list[CompetitorItem], format: OutputFormat):
         df.to_parquet(buffer)
         typer.echo(buffer.getvalue(), nl=False)
     elif format == OutputFormat.table:
-        typer.echo(df)
+        # Format the table with better display options
+        typer.echo(
+            df.to_string(
+                index=False,
+                max_colwidth=20,
+                float_format=lambda x: f"{x:.3f}" if pd.notna(x) else "",
+            )
+        )
     else:
         formats = ", ".join(OutputFormat.__members__.keys())
         raise ValueError(

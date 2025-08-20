@@ -38,10 +38,17 @@ uv run python cli.py fetch competitors linkedin:uber-com --format parquet > uber
 **Get competitors in human-readable table format (default):**
 ```bash
 uv run python cli.py fetch competitors linkedin:startupradar
-#         score  organization.id organization.name  ...
-# 0    1.000000           721826  startupradar.co  ...
-# 1    0.568760           539540         Seedtable  ...
-# 2    0.550740           833275            Signal  ...
+# score  organization.id    organization.name organization.description organization.website_url organization.linkedin_url  organization.employee_count  organization.founded_year
+# 1.000            86910                 Uber We are Uber. The ...      http://www.uber.com     https://linkedin....                    122487                         <NA>
+# 0.719           247381                 DiDi DiDi Global Inc. ...     http://www.didigl...     https://linkedin....                     25878                         <NA>
+# 0.686           177350                 Lyft Whether it’s an e...     https://www.lyft....     https://linkedin....                     25731                         2012
+# 0.677           513291                 Bolt At Bolt, we're bu...           http://bolt.eu     https://linkedin....                     12674                         2013
+# 0.640           150106                  Ola Ola is India’s la...       http://Olacabs.com     https://linkedin....                     27548                         2010
+# 0.616           166825               Careem Careem is buildin...     http://www.careem...     https://linkedin....                      5945                         2012
+# 0.585           239295                 Grab Grab is Southeast...     https://grab.careers     https://linkedin....                     49809                         2012
+# 0.574           176962                Gojek Gojek is Southeas...     https://www.gojek...     https://linkedin....                         0                         <NA>
+# 0.560           347141              inDrive inDrive is a glob...     http://www.inDriv...     https://linkedin....                      8588                         <NA>
+# 0.532           213690             DoorDash At DoorDash, our ...     https://careersat...     https://linkedin....                     67148                         <NA>
 # ...
 ```
 
@@ -49,28 +56,60 @@ uv run python cli.py fetch competitors linkedin:startupradar
 ```bash
 uv run python cli.py fetch lookalikes linkedin:crunchbase --format json
 # [
-#   {
-#     "organization": {
-#       "id": 177620,
-#       "name": "Crunchbase",
-#       "description": "Crunchbase is a predictive solution...",
-#       "website_url": "https://www.crunchbase.com/",
-#       "linkedin_url": "https://linkedin.com/company/crunchbase",
-#       "employee_count": 262,
-#       "founded_year": 2007
-#     },
-#     "score": 1.0
-#   },
-#   //...
+#  {
+#    "organization": {
+#      "id": 86910,
+#      "name": "Uber",
+#      "description": "We are Uber. The go-getters...",
+#      "website_url": "http://www.uber.com",
+#      "linkedin_url": "https://linkedin.com/company/uber-com",
+#      "employee_count": 122487,
+#      "founded_year": null
+#    },
+#    "score": 1.0
+#  },
+#  {
+#    "organization": {
+#      "id": 247381,
+#      "name": "DiDi",
+#      "description": "DiDi Global Inc. is a leading mobility technology platform. ...",
+#      "website_url": "http://www.didiglobal.com",
+#      "linkedin_url": "https://linkedin.com/company/didiglobal",
+#      "employee_count": 25878,
+#      "founded_year": null
+#    },
+#    "score": 0.7185925781557272
+#  },
+#  {
+#    "organization": {
+#      "id": 177350,
+#      "name": "Lyft",
+#      "description": "Whether it\u2019s an everyday commute or a journey that changes everything, ...",
+#      "website_url": "https://www.lyft.com/",
+#      "linkedin_url": "https://linkedin.com/company/lyft",
+#      "employee_count": 25731,
+#      "founded_year": 2012
+#    },
+#    "score": 0.6859793660660187
+#  },
+#  ...
 # ]
 ```
 
 **Get competitors as CSV for spreadsheet analysis:**
 ```bash
-uv run python cli.py fetch competitors linkedin:startupradar --format csv
+uv run python cli.py fetch competitors linkedin:uber-com --format csv
 # score,organization.id,organization.name,organization.description,organization.website_url,organization.linkedin_url,organization.employee_count,organization.founded_year
-# 1.0,721826,startupradar.co,"Discover new startups earlier with our API...",https://startupradar.co,https://linkedin.com/company/startupradar,1,
-# 0.568760,539540,Seedtable,"Your go-to source for in-depth insights...",https://seedtable.com,https://linkedin.com/company/seedtable,0,2018.0
+# 1.0,86910,Uber,"We ar...",http://www.uber.com,https://linkedin.com/company/uber-com,122487,
+# 0.719,247381,DiDi,"DiDi ...",http://www.didiglobal.com,https://linkedin.com/company/didiglobal,25878,
+# 0.686,177350,Lyft,"Wheth...",https://www.lyft.com/,https://linkedin.com/company/lyft,25731,2012
+# 0.677,513291,Bolt,"At Bo...",http://bolt.eu,https://linkedin.com/company/bolt-eu,12674,2013
+# 0.640,150106,Ola,"Ola i...",http://Olacabs.com,https://linkedin.com/company/olacabs-com,27548,2010
+# 0.616,166825,Careem,"Caree...",http://www.careem.com,https://linkedin.com/company/careem,5945,2012
+# 0.585,239295,Grab,"Grab ...",https://grab.careers,https://linkedin.com/company/grabapp,49809,2012
+# 0.574,176962,Gojek,"Gojek...",https://www.gojek.io/careers,https://linkedin.com/company/gojek-gotogroup,0,
+# 0.560,347141,inDrive,"inDri...",http://www.inDrive.com,https://linkedin.com/company/indrive,8588,
+# 0.532,213690,DoorDash,"At Do...",https://careersatdoordash.com/,https://linkedin.com/company/doordash,67148,
 # ...
 ```
 
