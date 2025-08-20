@@ -10,3 +10,14 @@ dependencies = [
     "pydantic>=2.11.7",
     "typer>=0.16.1",
 ]
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["apistemic"]
