@@ -22,13 +22,13 @@ Export data in multiple formats and integrate seamlessly into your business inte
 
 ```bash
 # Discover competitors
-uv run python cli.py fetch competitors linkedin:startupradar
+python cli.py fetch competitors linkedin:startupradar
 
 # Find lookalikes with CSV export, e.g. for Excel import
-uv run python cli.py fetch lookalikes linkedin:crunchbase --format csv > crunchbase.csv
+python cli.py fetch lookalikes linkedin:crunchbase --format csv > crunchbase.csv
 
 # Export to Parquet for data analysis
-uv run python cli.py fetch competitors linkedin:uber-com --format parquet > uber.parquet
+python cli.py fetch competitors linkedin:uber-com --format parquet > uber.parquet
 ```
 
 ## 📋 Usage
@@ -37,7 +37,7 @@ uv run python cli.py fetch competitors linkedin:uber-com --format parquet > uber
 
 **Get competitors in human-readable table format (default):**
 ```bash
-uv run python cli.py fetch competitors linkedin:startupradar
+python cli.py fetch competitors linkedin:startupradar
 # score  organization.id    organization.name organization.description organization.website_url organization.linkedin_url  organization.employee_count  organization.founded_year
 # 1.000            86910                 Uber We are Uber. The ...      http://www.uber.com     https://linkedin....                    122487                         <NA>
 # 0.719           247381                 DiDi DiDi Global Inc. ...     http://www.didigl...     https://linkedin....                     25878                         <NA>
@@ -54,7 +54,7 @@ uv run python cli.py fetch competitors linkedin:startupradar
 
 **Get lookalikes as structured JSON:**
 ```bash
-uv run python cli.py fetch lookalikes linkedin:crunchbase --format json
+python cli.py fetch lookalikes linkedin:crunchbase --format json
 # [
 #  {
 #    "organization": {
@@ -98,7 +98,7 @@ uv run python cli.py fetch lookalikes linkedin:crunchbase --format json
 
 **Get competitors as CSV for spreadsheet analysis:**
 ```bash
-uv run python cli.py fetch competitors linkedin:uber-com --format csv
+python cli.py fetch competitors linkedin:uber-com --format csv
 # score,organization.id,organization.name,organization.description,organization.website_url,organization.linkedin_url,organization.employee_count,organization.founded_year
 # 1.0,86910,Uber,"We ar...",http://www.uber.com,https://linkedin.com/company/uber-com,122487,
 # 0.719,247381,DiDi,"DiDi ...",http://www.didiglobal.com,https://linkedin.com/company/didiglobal,25878,
@@ -115,7 +115,7 @@ uv run python cli.py fetch competitors linkedin:uber-com --format csv
 
 **Get help for any command:**
 ```bash
-uv run python cli.py --help
+python cli.py --help
 # Usage: cli.py [OPTIONS] COMMAND [ARGS]...
 #
 # ╭─ Options ────────────────────────────────────────────────────────────────────╮
@@ -132,7 +132,7 @@ uv run python cli.py --help
 
 **Get detailed help for the fetch command:**
 ```bash
-uv run python cli.py fetch --help
+python cli.py fetch --help
 # Usage: cli.py fetch [OPTIONS] ENDPOINT:{competitors|lookalikes} SLUG
 #
 # Fetch competitors or lookalikes for a given company.
@@ -168,7 +168,10 @@ uv run python cli.py fetch --help
 
 2. **Install dependencies**
    ```bash
+   # preferred
    uv sync
+   # alternatively
+   pip install -r requirements.txt
    ```
 
 3. **Configure API credentials**
@@ -181,21 +184,25 @@ uv run python cli.py fetch --help
    # add API key to your env
    export RAPIDAPI_API_KEY="your-rapidapi-api-key"
 
-   # or run via uv with env-file
+   # or run uv with env-file
    uv run --env-file=.env python cli.py
    ```
 
+4. **Usage**
+   To run the CLI,
+   use `uv run --env-file=.env python` with uv
+   or `python cli.py` in virtual evironments.
 
 ## 💡 Examples
 
 ### Market Research Workflow
 ```bash
 # Export competitor data for analysis
-uv run python cli.py fetch competitors linkedin:uber-com --format csv > competitors.csv
+python cli.py fetch competitors linkedin:uber-com --format csv > competitors.csv
 
 # Get lookalikes in multiple formats (once via domain and once via linkedin slug)
-uv run python cli.py fetch lookalikes domain:uber.com --format json > lookalikes.json
-uv run python cli.py fetch lookalikes linkedin:uber-com --format parquet > lookalikes.parquet
+python cli.py fetch lookalikes domain:uber.com --format json > lookalikes.json
+python cli.py fetch lookalikes linkedin:uber-com --format parquet > lookalikes.parquet
 ```
 
 ### Integration with Data Science Tools
@@ -211,7 +218,7 @@ print(df.head())
 
 - Python 3.13+
 - Valid Apistemic Markets API key
-- Dependencies managed with `uv`
+- Dependencies managed with `uv` (pip works, too)
 
 ## 📚 API Reference
 
