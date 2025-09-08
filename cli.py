@@ -89,7 +89,7 @@ def _display_items(items: list[CompetitorItem], format: OutputFormat):
             df[col] = df[col].astype("Int64")
 
     if format == OutputFormat.csv:
-        typer.echo(df.to_csv(index=False))
+        typer.echo(df.to_csv(index=False), nl=False)
     elif format == OutputFormat.parquet:
         buffer = io.BytesIO()
         df.to_parquet(buffer)
